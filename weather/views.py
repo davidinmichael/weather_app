@@ -3,8 +3,9 @@ import requests
 
 def weather_home(request):
     if request.method == 'POST':
+        app_id = ""
         city = request.POST.get("city")
-        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=4e482a857fdf08ae71fa7a53aff40b27"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={app_id}"
         response = requests.get(url).json()
         context = {
             "weather": response,
