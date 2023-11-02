@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <section>
+        <div class="card">
+            <h2 class="head">Your Weather Today</h2>
+            <div class="info">
+            <h4>Your Weather Details</h4>
+            {% if weather %}
+            <p>Weather Condition: {{ weather.weather.0.main }}</p>
+            <img src="http://openweathermap.org/img/wn/{{ weather.weather.0.icon }}.png" alt=""/>
+            <p>Country: {{ weather.sys.country}}</p>
+            <p>City: {{ weather.name}}</p>
+            {% endif %}
+        </div>
+      </div>
+      <div class="form">
+        <!-- <h1>Weather Today</h1> -->
+        <p>Get the latest weather information</p>
+        <p>Enter City to search</p>
+        <form action="{% url 'weather:home' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
